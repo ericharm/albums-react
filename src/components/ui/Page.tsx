@@ -28,7 +28,7 @@ export const Page: React.FC<React.PropsWithChildren> = ({ children }) => {
     const tokenAge = loadTokenAge()
 
     const now = new Date().getTime()
-    const oneHourAgo = now - 3600
+    const oneHourAgo = now - 3600000
 
     if (tokenAge && tokenAge.getTime() < oneHourAgo) {
       currentUser = undefined

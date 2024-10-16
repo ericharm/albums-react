@@ -9,7 +9,6 @@ export const Router = createBrowserRouter([
     path: "/",
     element: <AlbumsPage />,
   },
-
   {
     path: "/albums",
     element: <AlbumsPage />,

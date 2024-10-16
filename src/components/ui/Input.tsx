@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { BorderRadius, Color, FontWeight, TextSpacing } from '../../Theme';
+import { BorderRadius, Color, FontSize, FontWeight, TextSpacing } from '../../Theme';
 import { SelectFieldProps, TextFieldProps } from '../../models/props';
 
-const TextInput = styled.input`
+export const TextInput = styled.input`
     border: 1px solid ${Color.black};
-    border-radius: 4px;
-    font-size: 16px;
-    padding: 8px;
+    border-radius: ${TextSpacing.small};
+    font-size: ${FontSize.medium};
+    padding: ${TextSpacing.medium};
     width: 100%;
 `;
 

@@ -3,11 +3,15 @@ import { httpClient } from './Http';
 import { AlbumsResponse, CreateAlbumRequest, CreateAlbumResponse } from './models/albums';
 import { loadUser } from './LocalStorage';
 
-const albumsUrl = '/albums';
+const albumsUrl = 'albums';
 
-export const getAlbums = (pageNumber: number): Promise<AxiosResponse<AlbumsResponse>> =>
+export const searchAlbums = (
+    pageNumber: number,
+    query?: string
+): Promise<AxiosResponse<AlbumsResponse>> =>
     httpClient.get(albumsUrl, {
         params: {
+            query: query,
             page: pageNumber,
         },
     });

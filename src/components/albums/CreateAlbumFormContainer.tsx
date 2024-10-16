@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { DispatchContext } from '../../Store';
 import { CreateAlbumRequest } from '../../service/models/albums';
 import { setAlbums, setCreateAlbumModalOpen } from '../../store/Action';
-import { createAlbum, getAlbums } from '../../service/AlbumsService';
+import { createAlbum, searchAlbums } from '../../service/AlbumsService';
 import { CreateAlbumForm } from './CreateAlbumForm';
 import { toast } from 'react-toastify';
 
@@ -18,11 +18,10 @@ export const CreateAlbumFormContainer: React.FC<React.PropsWithChildren> = () =>
   const submitCreateAlbumForm = useCallback(
     async (request: CreateAlbumRequest) => {
       try {
-        const albumRespone = await createAlbum(request);
-        console.log(albumRespone);
+        await createAlbum(request);
         toast.success('Your album was added');
         dispatch(setCreateAlbumModalOpen(false));
-        const albumsResponse = await getAlbums(1);
+        const albumsResponse = await searchAlbums(1, undefined);
         dispatch(setAlbums(albumsResponse.data));
       } catch (error) {
         console.error(error);

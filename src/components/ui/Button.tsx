@@ -7,7 +7,7 @@ export const Button = styled.button`
   border-radius: ${TextSpacing.small};
   border: 1px solid ${Color.purple};
   cursor: pointer;
-  font-size: ${FontSize.medium};
+  font-size: ${FontSize.small};
   padding: ${TextSpacing.medium} ${TextSpacing.large};
   text-align: center;
   font-family: monospace;

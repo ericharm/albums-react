@@ -1,6 +1,10 @@
 import { PaginatedResponse } from './response';
 import { Album } from '../../models/Album';
 
+export interface SearchAlbumsRequest {
+    query?: string;
+}
+
 export interface AlbumsResponse extends PaginatedResponse {
     albums: Album[];
 }

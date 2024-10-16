@@ -17,6 +17,28 @@ const PageNumber = styled.div<{ $current?: boolean; }>`
   color: ${props => props.$current ? Color.white : Color.black};
 `;
 
+const getPageRange = (n: number, count: number, max: number): number[] => {
+  const pageRange = [n]
+
+  let offset = 1;
+  while (pageRange.length < count) {
+    const next = n + offset;
+    const prev = n - offset;
+
+    if (next > max && prev < 1) {
+      break;
+    }
+
+    if (next <= max) pageRange.push(next);
+    if (prev >= 1 && prev != next) pageRange.unshift(prev);
+
+    offset += 1;
+  }
+
+  return pageRange;
+
+};
+
 export const Pagination: React.FC<PaginationProps> = ({ pages, page, onSetPage }) => {
 
   const onFirst = useCallback(() => {
@@ -39,13 +61,15 @@ export const Pagination: React.FC<PaginationProps> = ({ pages, page, onSetPage }
     }
   }, [page]);
 
+  const pageRange = getPageRange(page, 5, pages);
+
   return (
     <PaginationWrapper>
       <PageNumber onClick={onFirst}>First</PageNumber>
       <PageNumber onClick={onPrev}>Previous</PageNumber>
-      {Array.from({ length: pages }, (_, i) => (
-        <PageNumber $current={page == i + 1} key={i} onClick={() => onSetPage(i + 1)}>
-          {i + 1}
+      {pageRange.map((p) => (
+        <PageNumber $current={page == p} key={p} onClick={() => onSetPage(p)}>
+          {p}
         </PageNumber>
       ))}
       <PageNumber onClick={onNext}>Next</PageNumber>
