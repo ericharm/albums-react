@@ -18,3 +18,13 @@ export const Button = styled.button`
   }
 `;
 
+
+export const DeleteButton = styled(Button)`
+    background-color: ${Color.white};
+    color: ${Color.crimson};
+    border: 1px solid ${Color.crimson};
+
+    &:hover {
+        background-color: ${Color.crimson};
+    }
+`;

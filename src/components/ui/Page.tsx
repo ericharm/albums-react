@@ -5,11 +5,12 @@ import { DispatchContext, StateContext } from "../../Store";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../header/Header";
 import { LoginModal } from "../login/LoginModal";
-import { loadUser, loadTokenAge } from "../../service/LocalStorage";
+import { loadUser } from "../../service/LocalStorage";
 import { setUser } from "../../store/Action";
-import { CreateAlbumModal } from "../albums/CreateAlbumModal";
+import { AlbumFormModal } from "../albums/AlbumFormModal";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { DeleteAlbumModal } from "../albums/DeleteAlbumModal";
 
 const PageContents = styled.div`
   margin: 0 auto;
@@ -21,19 +22,13 @@ export const Page: React.FC<React.PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
   const state = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
-  const { isLoginModalOpen, isCreateAlbumModalOpen } = state;
+  const { isLoginModalOpen, isAlbumFormModalOpen, isDeleteAlbumModalOpen } = state;
 
   useEffect(() => {
     let currentUser = loadUser()
-    const tokenAge = loadTokenAge()
-
-    const now = new Date().getTime()
-    const oneHourAgo = now - 3600000
-
-    if (tokenAge && tokenAge.getTime() < oneHourAgo) {
-      currentUser = undefined
-    }
-
+    const tokenExpiration = currentUser?.token_expiration
+    const now = new Date()
+    if (tokenExpiration && now > new Date(tokenExpiration)) currentUser = undefined
     dispatch(setUser(currentUser))
   }, [loadUser]);
 
@@ -41,7 +36,8 @@ export const Page: React.FC<React.PropsWithChildren> = ({ children }) => {
     <>
       <Header navigate={navigate} />
       {isLoginModalOpen && <LoginModal />}
-      {isCreateAlbumModalOpen && <CreateAlbumModal />}
+      {isAlbumFormModalOpen && <AlbumFormModal />}
+      {isDeleteAlbumModalOpen && <DeleteAlbumModal />}
       <PageContents>
         {children}
       </PageContents>

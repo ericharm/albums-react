@@ -1,3 +1,4 @@
+import { Album } from '../models/Album';
 import { User } from '../models/User';
 import { clearUser, saveUser } from '../service/LocalStorage';
 import { AlbumsResponse } from '../service/models/albums';
@@ -10,9 +11,10 @@ export interface Action {
 export enum ActionKind {
     SetAlbums,
     SetUser,
-    SetTokenAge,
     SetLoginModalOpen,
-    SetCreateAlbumModalOpen,
+    SetAlbumFormModalOpen,
+    SetDeleteAlbumModalOpen,
+    SetCurrentAlbum,
 }
 
 export const setAlbums = (albums: AlbumsResponse) => ({
@@ -26,17 +28,22 @@ export const setUser = (user?: User) => {
     return { type: ActionKind.SetUser, payload: user };
 };
 
-export const setTokenAge = (tokenAge?: Date) => ({
-    type: ActionKind.SetTokenAge,
-    payload: tokenAge,
-});
-
 export const setLoginModalOpen = (isLoginModalOpen: boolean) => ({
     type: ActionKind.SetLoginModalOpen,
     payload: isLoginModalOpen,
 });
 
-export const setCreateAlbumModalOpen = (isCreateAlbumModalOpen: boolean) => ({
-    type: ActionKind.SetCreateAlbumModalOpen,
-    payload: isCreateAlbumModalOpen,
+export const setAlbumFormModalOpen = (isAlbumFormModalOpen: boolean) => ({
+    type: ActionKind.SetAlbumFormModalOpen,
+    payload: isAlbumFormModalOpen,
+});
+
+export const setDeleteAlbumModalOpen = (isDeleteAlbumModalOpen: boolean) => ({
+    type: ActionKind.SetDeleteAlbumModalOpen,
+    payload: isDeleteAlbumModalOpen,
+});
+
+export const setCurrentAlbum = (currentAlbum?: Album) => ({
+    type: ActionKind.SetCurrentAlbum,
+    payload: currentAlbum,
 });

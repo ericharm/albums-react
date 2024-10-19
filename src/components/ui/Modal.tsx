@@ -36,8 +36,10 @@ const CloseButton = styled.div`
         height: 1em;
         line-height: 1em;
     }
-    &:hover {
+    &:hover:before {
       cursor: pointer;
+      color: ${Color.white};
+      background: ${Color.purple};
     }
 `;
 

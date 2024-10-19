@@ -14,6 +14,7 @@ const SearchTextInput = styled(TextInput)`
 
 const SearchButton = styled(Button)`
     border-radius: 0 ${TextSpacing.small}  ${TextSpacing.small} 0;
+    border-left: none;
 `
 
 export const SearchAlbumsForm: React.FC<FormikValues> = ({ formik }) => (

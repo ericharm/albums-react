@@ -30,17 +30,13 @@ export const Spacing = {
     large: '3em',
 };
 
+export const BorderRadius = {
+    small: '4px',
+};
+
 export const Color = {
     white: '#ffffff',
     black: '#000000',
-    lightGray: '#cccccc',
-    magenta: '#ff00ff',
-    cerulean: '#007ba7',
-    neonPink: '#ff6ec7',
-    orange: '#ff7f00',
     purple: '#800080',
-};
-
-export const BorderRadius = {
-    small: '4px',
+    crimson: '#dc143c',
 };

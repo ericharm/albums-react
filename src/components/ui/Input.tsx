@@ -8,6 +8,7 @@ export const TextInput = styled.input`
     font-size: ${FontSize.medium};
     padding: ${TextSpacing.medium};
     width: 100%;
+    font-family: monospace;
 `;
 
 const Label = styled.label`
@@ -20,6 +21,7 @@ const Select = styled.select`
     padding: ${TextSpacing.medium};
     width: 100%;
     background: ${Color.white};
+    font-family: monospace;
 `;
 
 export const TextField: React.FC<TextFieldProps> = ({ id, label, name, value, onChange }) => (

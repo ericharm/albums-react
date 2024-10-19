@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { LoginUserRequest } from "../../service/models/users";
 import { LoginForm } from "./LoginForm";
 import { loginUser } from "../../service/UsersService";
-import { setLoginModalOpen, setTokenAge, setUser } from "../../store/Action";
+import { setLoginModalOpen, setUser } from "../../store/Action";
+import { toast } from "react-toastify";
 
 const validationSchema = yup.object({
   email: yup
@@ -16,7 +17,6 @@ const validationSchema = yup.object({
 
   password: yup
     .string()
-    .min(6, "Password should be of minimum 6 characters length")
     .required("Password is required"),
 });
 
@@ -28,10 +28,13 @@ export const LoginFormContainer: React.FC<React.PropsWithChildren> = () => {
 
   const submitLoginForm = useCallback(
     async (request: LoginUserRequest) => {
-      const response = await loginUser(request);
-      dispatch(setUser(response.data));
-      dispatch(setTokenAge(new Date()))
-      dispatch(setLoginModalOpen(false))
+      try {
+        const response = await loginUser(request);
+        dispatch(setUser(response.data));
+        dispatch(setLoginModalOpen(false))
+      } catch (error) {
+        toast.error("Invalid email or password")
+      }
     },
     [dispatch]
   );

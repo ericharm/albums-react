@@ -1,4 +1,5 @@
 import { SelectFieldOption, Column } from './ui';
+import { FormikValues } from 'formik';
 
 export interface PaginationProps {
     page: number;
@@ -9,13 +10,20 @@ export interface PaginationProps {
 }
 
 export interface ModalProps {
-    onClose: () => void;
+    onClose?: () => void;
     children: React.ReactNode;
+}
+
+export interface AlbumFormProps extends FormikValues {
+    showDeleteButton: boolean;
+    submitButtonText: string;
+    onClickDeleteButton: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export interface DataGridProps<T> {
     columns: Column[];
     data: T[];
+    onClickRow?: (event: T) => void;
 }
 
 export interface TextFieldProps {

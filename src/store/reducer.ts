@@ -7,12 +7,14 @@ export const reducer = (state: State, { type, payload }: Action) => {
             return { ...state, albums: payload };
         case ActionKind.SetUser:
             return { ...state, user: payload };
-        case ActionKind.SetTokenAge:
-            return { ...state, tokenAge: payload };
         case ActionKind.SetLoginModalOpen:
             return { ...state, isLoginModalOpen: payload };
-        case ActionKind.SetCreateAlbumModalOpen:
-            return { ...state, isCreateAlbumModalOpen: payload };
+        case ActionKind.SetAlbumFormModalOpen:
+            return { ...state, isAlbumFormModalOpen: payload };
+        case ActionKind.SetDeleteAlbumModalOpen:
+            return { ...state, isDeleteAlbumModalOpen: payload };
+        case ActionKind.SetCurrentAlbum:
+            return { ...state, currentAlbum: payload };
         default:
             console.warn('UNKNOWN ACTION', type);
             return state;

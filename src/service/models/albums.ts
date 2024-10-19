@@ -9,7 +9,7 @@ export interface AlbumsResponse extends PaginatedResponse {
     albums: Album[];
 }
 
-export interface CreateAlbumRequest {
+export interface AlbumRequest {
     artist?: string;
     released?: string;
     title: string;
@@ -18,7 +18,7 @@ export interface CreateAlbumRequest {
     notes?: string;
 }
 
-export interface CreateAlbumResponse extends CreateAlbumRequest {
+export interface AlbumResponse extends AlbumRequest {
     id: string;
     created_at: string;
     updated_at: string;

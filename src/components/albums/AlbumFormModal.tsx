@@ -1,20 +1,20 @@
 import React, { useCallback, useContext } from "react";
 import { Modal } from "../ui/Modal";
-import { CreateAlbumFormContainer } from "./CreateAlbumFormContainer";
+import { AlbumFormContainer } from "./AlbumFormContainer";
 import { DispatchContext } from "../../Store";
-import { setCreateAlbumModalOpen } from "../../store/Action";
+import { setAlbumFormModalOpen } from "../../store/Action";
 
 
-export const CreateAlbumModal: React.FC<React.PropsWithChildren> = () => {
+export const AlbumFormModal: React.FC<React.PropsWithChildren> = () => {
   const dispatch = useContext(DispatchContext);
 
   const closeModal = useCallback(() => {
-    dispatch(setCreateAlbumModalOpen(false));
+    dispatch(setAlbumFormModalOpen(false));
   }, [dispatch]);
 
   return (
     <Modal onClose={closeModal}>
-      <CreateAlbumFormContainer />
+      <AlbumFormContainer />
     </Modal>
   );
 }
