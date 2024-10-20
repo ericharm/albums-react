@@ -10,7 +10,13 @@ import { DataGrid } from '../ui/DataGrid';
 import { Color } from '../../Theme';
 import { Button } from '../ui/Button';
 import { DispatchContext, StateContext } from '../../Store';
-import { setAlbums, setAlbumFormModalOpen, setCurrentAlbum, setDeleteAlbumModalOpen, setLoginModalOpen } from '../../store/Action';
+import {
+    setAlbums,
+    setAlbumFormModalOpen,
+    setCurrentAlbum,
+    setDeleteAlbumModalOpen,
+    setLoginModalOpen,
+} from '../../store/Action';
 import { Pagination } from '../ui/Pagination';
 import { SearchAlbumsFormContainer } from '../albums/SearchAlbumsFormContainer';
 
@@ -33,81 +39,86 @@ const Spacer = styled.div`
 `;
 
 const columns: Column[] = [
-  { key: 'artist', label: 'Artist' },
-  { key: 'title', label: 'Title' },
-  { key: 'released', label: 'Released' },
-  { key: 'genres', label: 'Genres' },
-  { key: 'label', label: 'Label' },
-  { key: 'notes', label: 'Notes' },
+    { key: 'artist', label: 'Artist' },
+    { key: 'title', label: 'Title' },
+    { key: 'released', label: 'Released' },
+    { key: 'genres', label: 'Genres' },
+    { key: 'label', label: 'Label' },
+    { key: 'notes', label: 'Notes' },
 ];
 
 export const AlbumsPage: React.FC<React.PropsWithChildren> = () => {
-  const state = useContext(StateContext);
-  const dispatch = useContext(DispatchContext);
-  const {
-    user, albums, currentAlbum, isLoginModalOpen, isAlbumFormModalOpen, isDeleteAlbumModalOpen
-  } = state;
+    const state = useContext(StateContext);
+    const dispatch = useContext(DispatchContext);
+    const {
+        user,
+        albums,
+        currentAlbum,
+        isLoginModalOpen,
+        isAlbumFormModalOpen,
+        isDeleteAlbumModalOpen,
+    } = state;
 
-  const closeModal = useCallback(() => {
-    if (isAlbumFormModalOpen) dispatch(setAlbumFormModalOpen(false));
-    if (isLoginModalOpen) dispatch(setLoginModalOpen(false));
-    if (isDeleteAlbumModalOpen) dispatch(setDeleteAlbumModalOpen(false))
-    if (currentAlbum) dispatch(setCurrentAlbum(undefined));
-  }, [isAlbumFormModalOpen, isLoginModalOpen, currentAlbum]);
+    const closeModal = useCallback(() => {
+        if (isAlbumFormModalOpen) dispatch(setAlbumFormModalOpen(false));
+        if (isLoginModalOpen) dispatch(setLoginModalOpen(false));
+        if (isDeleteAlbumModalOpen) dispatch(setDeleteAlbumModalOpen(false));
+        if (currentAlbum) dispatch(setCurrentAlbum(undefined));
+    }, [isAlbumFormModalOpen, isLoginModalOpen, currentAlbum]);
 
-  useEffect(() => {
-    addEventListener('keydown', (event: KeyboardEvent) => {
-      if (event.key === 'Escape') closeModal();
-    });
-  }, [closeModal])
+    useEffect(() => {
+        addEventListener('keydown', (event: KeyboardEvent) => {
+            if (event.key === 'Escape') closeModal();
+        });
+    }, [closeModal]);
 
-  const onPageLoad = useCallback(async () => {
-    const response = await searchAlbums(1);
-    dispatch(setAlbums(response.data));
-  }, []);
+    const onPageLoad = useCallback(async () => {
+        const response = await searchAlbums(1);
+        dispatch(setAlbums(response.data));
+    }, []);
 
-  useEffect(() => {
-    onPageLoad();
-  }, []);
+    useEffect(() => {
+        onPageLoad();
+    }, []);
 
-  const onSetPage = useCallback(async (page: number) => {
-    const response = await searchAlbums(page);
-    dispatch(setAlbums(response.data));
-  }, []);
+    const onSetPage = useCallback(async (page: number) => {
+        const response = await searchAlbums(page);
+        dispatch(setAlbums(response.data));
+    }, []);
 
-  const onClickAlbumRow = useCallback((album: Album) => {
-    dispatch(setCurrentAlbum(album));
-    dispatch(setAlbumFormModalOpen(true));
-  }, []);
+    const onClickAlbumRow = useCallback((album: Album) => {
+        dispatch(setCurrentAlbum(album));
+        dispatch(setAlbumFormModalOpen(true));
+    }, []);
 
-  const openAlbumFormModal = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    dispatch(setAlbumFormModalOpen(true));
-  }, []);
+    const openAlbumFormModal = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        dispatch(setAlbumFormModalOpen(true));
+    }, []);
 
-  return (
-    <Page>
-      <Actions>
-        <SearchAlbumsFormContainer />
-        <Spacer />
-        {user && <Button onClick={openAlbumFormModal}>Create Album</Button>}
-      </Actions>
+    return (
+        <Page>
+            <Actions>
+                <SearchAlbumsFormContainer />
+                <Spacer />
+                {user && <Button onClick={openAlbumFormModal}>Create Album</Button>}
+            </Actions>
 
-      <GridWrapper>
-        <DataGrid<Album>
-          columns={columns}
-          data={albums.albums}
-          onClickRow={user ? onClickAlbumRow : undefined}
-        />
-      </GridWrapper>
+            <GridWrapper>
+                <DataGrid<Album>
+                    columns={columns}
+                    data={albums.albums}
+                    onClickRow={user ? onClickAlbumRow : undefined}
+                />
+            </GridWrapper>
 
-      <Pagination
-        page={albums.page}
-        pageSize={albums.page_size}
-        pages={albums.total_pages}
-        total={albums.total_count}
-        onSetPage={onSetPage}
-      />
-    </Page>
-  );
+            <Pagination
+                page={albums.page}
+                pageSize={albums.page_size}
+                pages={albums.total_pages}
+                total={albums.total_count}
+                onSetPage={onSetPage}
+            />
+        </Page>
+    );
 };

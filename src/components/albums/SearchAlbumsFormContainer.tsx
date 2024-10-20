@@ -8,30 +8,29 @@ import { searchAlbums } from '../../service/AlbumsService';
 import { SearchAlbumsForm } from './SearchAlbumsForm';
 
 const validationSchema = yup.object({
-  query: yup.string(),
+    query: yup.string(),
 });
 
 export const SearchAlbumsFormContainer: React.FC<React.PropsWithChildren> = () => {
-  const dispatch = useContext(DispatchContext);
+    const dispatch = useContext(DispatchContext);
 
-  const submitSearchAlbumsForm = useCallback(
-    async (request: SearchAlbumsRequest) => {
-      const albumsResponse = await searchAlbums(1, request.query);
-      dispatch(setAlbums(albumsResponse.data));
-    },
-    [dispatch]
-  );
+    const submitSearchAlbumsForm = useCallback(
+        async (request: SearchAlbumsRequest) => {
+            const albumsResponse = await searchAlbums(1, request.query);
+            dispatch(setAlbums(albumsResponse.data));
+        },
+        [dispatch]
+    );
 
-  const formik = useFormik({
-    initialValues: {
-      query: String(),
-    },
-    validationSchema: validationSchema,
-    onSubmit: (request: SearchAlbumsRequest) => {
-      submitSearchAlbumsForm(request);
-    },
-  });
+    const formik = useFormik({
+        initialValues: {
+            query: String(),
+        },
+        validationSchema: validationSchema,
+        onSubmit: (request: SearchAlbumsRequest) => {
+            submitSearchAlbumsForm(request);
+        },
+    });
 
-  return <SearchAlbumsForm formik={formik} />;
+    return <SearchAlbumsForm formik={formik} />;
 };
-

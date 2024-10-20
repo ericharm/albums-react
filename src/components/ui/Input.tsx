@@ -25,35 +25,35 @@ const Select = styled.select`
 `;
 
 export const TextField: React.FC<TextFieldProps> = ({ id, label, name, value, onChange }) => (
-  <>
-    <Label>{label}</Label>
-    <TextInput type="text" id={id} name={name} value={value} onChange={onChange} />
-  </>
+    <>
+        <Label>{label}</Label>
+        <TextInput type="text" id={id} name={name} value={value} onChange={onChange} />
+    </>
 );
 
 export const PasswordField: React.FC<TextFieldProps> = ({ id, label, name, value, onChange }) => (
-  <>
-    <Label>{label}</Label>
-    <TextInput type="password" id={id} name={name} value={value} onChange={onChange} />
-  </>
+    <>
+        <Label>{label}</Label>
+        <TextInput type="password" id={id} name={name} value={value} onChange={onChange} />
+    </>
 );
 
 export const SelectField: React.FC<SelectFieldProps> = ({
-  id,
-  label,
-  name,
-  value,
-  options,
-  onChange,
+    id,
+    label,
+    name,
+    value,
+    options,
+    onChange,
 }) => (
-  <>
-    <Label>{label}</Label>
-    <Select id={id} name={name} value={value} onChange={onChange}>
-      {options.map(option => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </Select>
-  </>
+    <>
+        <Label>{label}</Label>
+        <Select id={id} name={name} value={value} onChange={onChange}>
+            {options.map(option => (
+                <option key={option.value} value={option.value}>
+                    {option.label}
+                </option>
+            ))}
+        </Select>
+    </>
 );

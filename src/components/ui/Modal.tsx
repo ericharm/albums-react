@@ -37,17 +37,17 @@ const CloseButton = styled.div`
         line-height: 1em;
     }
     &:hover:before {
-      cursor: pointer;
-      color: ${Color.white};
-      background: ${Color.purple};
+        cursor: pointer;
+        color: ${Color.white};
+        background: ${Color.purple};
     }
 `;
 
 export const Modal: React.FC<ModalProps> = ({ onClose, children }) => (
-  <ModalCurtain>
-    <ModalContent>
-      <CloseButton onClick={onClose} />
-      {children}
-    </ModalContent>
-  </ModalCurtain>
+    <ModalCurtain>
+        <ModalContent>
+            <CloseButton onClick={onClose} />
+            {children}
+        </ModalContent>
+    </ModalCurtain>
 );

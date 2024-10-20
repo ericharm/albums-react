@@ -9,71 +9,69 @@ const PaginationWrapper = styled.div`
     margin-top: 20px;
 `;
 
-const PageNumber = styled.div<{ $current?: boolean; }>`
-  cursor: ${props => props.$current ? 'default' : 'pointer'};;
-  padding: ${TextSpacing.medium};
-  border-radius: ${BorderRadius.small};
-  background-color: ${props => props.$current ? Color.purple : Color.white};
-  color: ${props => props.$current ? Color.white : Color.black};
+const PageNumber = styled.div<{ $current?: boolean }>`
+    cursor: ${props => (props.$current ? 'default' : 'pointer')};
+    padding: ${TextSpacing.medium};
+    border-radius: ${BorderRadius.small};
+    background-color: ${props => (props.$current ? Color.purple : Color.white)};
+    color: ${props => (props.$current ? Color.white : Color.black)};
 `;
 
 const getPageRange = (n: number, count: number, max: number): number[] => {
-  const pageRange = [n]
+    const pageRange = [n];
 
-  let offset = 1;
-  while (pageRange.length < count) {
-    const next = n + offset;
-    const prev = n - offset;
+    let offset = 1;
+    while (pageRange.length < count) {
+        const next = n + offset;
+        const prev = n - offset;
 
-    if (next > max && prev < 1) {
-      break;
+        if (next > max && prev < 1) {
+            break;
+        }
+
+        if (next <= max) pageRange.push(next);
+        if (prev >= 1 && prev != next) pageRange.unshift(prev);
+
+        offset += 1;
     }
 
-    if (next <= max) pageRange.push(next);
-    if (prev >= 1 && prev != next) pageRange.unshift(prev);
-
-    offset += 1;
-  }
-
-  return pageRange;
-
+    return pageRange;
 };
 
 export const Pagination: React.FC<PaginationProps> = ({ pages, page, onSetPage }) => {
+    const onFirst = useCallback(() => {
+        onSetPage(1);
+    }, []);
 
-  const onFirst = useCallback(() => {
-    onSetPage(1);
-  }, []);
+    const onLast = useCallback(() => {
+        onSetPage(pages);
+    }, [pages]);
 
-  const onLast = useCallback(() => {
-    onSetPage(pages);
-  }, [pages]);
+    const onPrev = useCallback(() => {
+        if (page > 1) {
+            onSetPage(page - 1);
+        }
+    }, [page]);
 
-  const onPrev = useCallback(() => {
-    if (page > 1) {
-      onSetPage(page - 1);
-    }
-  }, [page]);
+    const onNext = useCallback(() => {
+        if (page < pages) {
+            onSetPage(page + 1);
+        }
+    }, [page]);
 
-  const onNext = useCallback(() => {
-    if (page < pages) {
-      onSetPage(page + 1);
-    }
-  }, [page]);
+    const pageRange = getPageRange(page, 5, pages);
 
-  const pageRange = getPageRange(page, 5, pages);
-
-  return (
-    <PaginationWrapper>
-      <PageNumber onClick={onFirst}>First</PageNumber>
-      <PageNumber onClick={onPrev}>Previous</PageNumber>
-      {pageRange.map((p) => (
-        <PageNumber $current={page == p} key={p} onClick={() => onSetPage(p)}>
-          {p}
-        </PageNumber>
-      ))}
-      <PageNumber onClick={onNext}>Next</PageNumber>
-      <PageNumber onClick={onLast}>Last</PageNumber>
-    </PaginationWrapper>
-  );
-}
+    return (
+        <PaginationWrapper>
+            <PageNumber onClick={onFirst}>First</PageNumber>
+            <PageNumber onClick={onPrev}>Previous</PageNumber>
+            {pageRange.map(p => (
+                <PageNumber $current={page == p} key={p} onClick={() => onSetPage(p)}>
+                    {p}
+                </PageNumber>
+            ))}
+            <PageNumber onClick={onNext}>Next</PageNumber>
+            <PageNumber onClick={onLast}>Last</PageNumber>
+        </PaginationWrapper>
+    );
+};
