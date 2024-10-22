@@ -15,3 +15,10 @@ Albums React
 - Source directory probably won't change
 - `./deploy.sh`
 
+
+## TODO
+
+- Genre pills
+- Remove genre from album
+- Genre select
+- Add genre to album

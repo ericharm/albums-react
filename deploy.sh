@@ -17,3 +17,7 @@ npm run build
 echo "Uploading files to S3..."
 aws s3 sync "$BUILD_DIR" s3://"$BUCKET_NAME" --delete
 echo "Deployment complete!"
+
+echo "Invalidating CloudFront cache..."
+aws cloudfront create-invalidation --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" --paths "/*"
+echo "Cache invalidation complete!"
