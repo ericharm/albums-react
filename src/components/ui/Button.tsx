@@ -3,9 +3,9 @@ import { Color, FontSize, TextSpacing } from '../../Theme';
 
 export const Button = styled.button`
     background-color: ${Color.white};
-    color: ${Color.purple};
+    color: ${Color.blue};
     border-radius: ${TextSpacing.small};
-    border: 1px solid ${Color.purple};
+    border: 1px solid ${Color.blue};
     cursor: pointer;
     font-size: ${FontSize.small};
     padding: ${TextSpacing.medium} ${TextSpacing.large};
@@ -13,17 +13,17 @@ export const Button = styled.button`
     font-family: monospace;
 
     &:hover {
-        background-color: ${Color.purple};
+        background-color: ${Color.blue};
         color: ${Color.white};
     }
 `;
 
 export const DeleteButton = styled(Button)`
     background-color: ${Color.white};
-    color: ${Color.crimson};
-    border: 1px solid ${Color.crimson};
+    color: ${Color.pink};
+    border: 1px solid ${Color.pink};
 
     &:hover {
-        background-color: ${Color.crimson};
+        background-color: ${Color.pink};
     }
 `;

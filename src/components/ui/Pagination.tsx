@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { PaginationProps } from '../../models/props';
 import styled from 'styled-components';
 import { BorderRadius, Color, TextSpacing } from '../../Theme';
+import { PaginationProps } from './models';
 
 const PaginationWrapper = styled.div`
     display: flex;
@@ -12,8 +12,8 @@ const PaginationWrapper = styled.div`
 const PageNumber = styled.div<{ $current?: boolean }>`
     cursor: ${props => (props.$current ? 'default' : 'pointer')};
     padding: ${TextSpacing.medium};
-    border-radius: ${BorderRadius.small};
-    background-color: ${props => (props.$current ? Color.purple : Color.white)};
+    border-radius: ${BorderRadius.light};
+    background-color: ${props => (props.$current ? Color.blue : Color.white)};
     color: ${props => (props.$current ? Color.white : Color.black)};
 `;
 

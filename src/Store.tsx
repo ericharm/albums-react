@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, createContext, Reducer, PropsWithChildren } from 'react';
-import { Action } from './store/Action';
 import { reducer } from './store/reducer';
-import { initialState, State } from './store/State';
+import { Action, State } from './store/models';
+import { initialState } from './store/State';
 
 export const StateContext = createContext<State>(initialState);
 export const DispatchContext = createContext<React.Dispatch<Action>>(

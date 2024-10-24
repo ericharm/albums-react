@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Spacing } from '../../Theme';
 import { useCallback, useContext, useEffect } from 'react';
 import { Album } from '../../models/Album';
-import { Column } from '../../models/ui';
+import { Column } from '../ui/models';
 import { DataGrid } from '../ui/DataGrid';
 import { Color } from '../../Theme';
 import { Button } from '../ui/Button';
@@ -16,7 +16,7 @@ import {
     setCurrentAlbum,
     setDeleteAlbumModalOpen,
     setLoginModalOpen,
-} from '../../store/Action';
+} from '../../store/actions';
 import { Pagination } from '../ui/Pagination';
 import { SearchAlbumsFormContainer } from '../albums/SearchAlbumsFormContainer';
 
@@ -59,6 +59,14 @@ export const AlbumsPage: React.FC<React.PropsWithChildren> = () => {
         isDeleteAlbumModalOpen,
     } = state;
 
+    useEffect(() => {
+        const fetchAlbums = async () => {
+            const response = await searchAlbums(1);
+            dispatch(setAlbums(response.data));
+        };
+        fetchAlbums();
+    }, [searchAlbums, dispatch, setAlbums]);
+
     const closeModal = useCallback(() => {
         if (isAlbumFormModalOpen) dispatch(setAlbumFormModalOpen(false));
         if (isLoginModalOpen) dispatch(setLoginModalOpen(false));
@@ -70,31 +78,36 @@ export const AlbumsPage: React.FC<React.PropsWithChildren> = () => {
         addEventListener('keydown', (event: KeyboardEvent) => {
             if (event.key === 'Escape') closeModal();
         });
+
+        return () =>
+            removeEventListener('keydown', (event: KeyboardEvent) => {
+                if (event.key === 'Escape') closeModal();
+            });
     }, [closeModal]);
 
-    const onPageLoad = useCallback(async () => {
-        const response = await searchAlbums(1);
-        dispatch(setAlbums(response.data));
-    }, []);
+    const onSetPage = useCallback(
+        async (page: number) => {
+            const response = await searchAlbums(page);
+            dispatch(setAlbums(response.data));
+        },
+        [dispatch, searchAlbums]
+    );
 
-    useEffect(() => {
-        onPageLoad();
-    }, []);
+    const onClickAlbumRow = useCallback(
+        (album: Album) => {
+            dispatch(setCurrentAlbum(album));
+            dispatch(setAlbumFormModalOpen(true));
+        },
+        [dispatch, setCurrentAlbum, setAlbumFormModalOpen]
+    );
 
-    const onSetPage = useCallback(async (page: number) => {
-        const response = await searchAlbums(page);
-        dispatch(setAlbums(response.data));
-    }, []);
-
-    const onClickAlbumRow = useCallback((album: Album) => {
-        dispatch(setCurrentAlbum(album));
-        dispatch(setAlbumFormModalOpen(true));
-    }, []);
-
-    const openAlbumFormModal = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-        dispatch(setAlbumFormModalOpen(true));
-    }, []);
+    const openAlbumFormModal = useCallback(
+        (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            e.preventDefault();
+            dispatch(setAlbumFormModalOpen(true));
+        },
+        [dispatch, setAlbumFormModalOpen]
+    );
 
     return (
         <Page>

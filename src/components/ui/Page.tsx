@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../header/Header';
 import { LoginModal } from '../login/LoginModal';
 import { loadUser } from '../../service/LocalStorage';
-import { setUser } from '../../store/Action';
+import { setUser } from '../../store/actions';
 import { AlbumFormModal } from '../albums/AlbumFormModal';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

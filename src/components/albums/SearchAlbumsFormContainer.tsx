@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { DispatchContext } from '../../Store';
 import { SearchAlbumsRequest } from '../../service/models/albums';
-import { setAlbums } from '../../store/Action';
+import { setAlbums } from '../../store/actions';
 import { searchAlbums } from '../../service/AlbumsService';
 import { SearchAlbumsForm } from './SearchAlbumsForm';
 

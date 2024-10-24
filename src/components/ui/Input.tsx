@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BorderRadius, Color, FontSize, FontWeight, TextSpacing } from '../../Theme';
-import { SelectFieldProps, TextFieldProps } from '../../models/props';
+import { SelectFieldProps, TextFieldProps } from './models';
 
 export const TextInput = styled.input`
     border: 1px solid ${Color.black};
@@ -11,13 +11,13 @@ export const TextInput = styled.input`
     font-family: monospace;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
     font-weight: ${FontWeight.bold};
 `;
 
 const Select = styled.select`
     border: 1px solid ${Color.black};
-    border-radius: ${BorderRadius.small};
+    border-radius: ${BorderRadius.light};
     padding: ${TextSpacing.medium};
     width: 100%;
     background: ${Color.white};
@@ -47,7 +47,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
     onChange,
 }) => (
     <>
-        <Label>{label}</Label>
+        {label &&<Label>{label}</Label>}
         <Select id={id} name={name} value={value} onChange={onChange}>
             {options.map(option => (
                 <option key={option.value} value={option.value}>

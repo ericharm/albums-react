@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Color } from '../../Theme';
 
 export const Link = styled.a`
-    color: ${Color.purple};
+    color: ${Color.blue};
     text-decoration: none;
 
     &:hover {

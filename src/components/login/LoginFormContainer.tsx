@@ -5,7 +5,7 @@ import { DispatchContext } from '../../Store';
 import { LoginUserRequest } from '../../service/models/users';
 import { LoginForm } from './LoginForm';
 import { loginUser } from '../../service/UsersService';
-import { setLoginModalOpen, setUser } from '../../store/Action';
+import { setLoginModalOpen, setUser } from '../../store/actions';
 import { toast } from 'react-toastify';
 
 const validationSchema = yup.object({

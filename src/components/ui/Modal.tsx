@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ModalProps } from '../../models/props';
+import { ModalProps } from './models';
 import { Color, FontSize, Spacing, TextSpacing } from '../../Theme';
 
 const ModalCurtain = styled.div`
@@ -24,22 +24,22 @@ const ModalContent = styled.div`
 
 const CloseButton = styled.div`
     &:before {
-        content: 'X';
+        content: 'x';
         text-align: center;
         position: absolute;
         top: ${TextSpacing.medium};
         right: ${Spacing.small};
         font-size: ${FontSize.medium};
         border-radius: 50%;
-        border: 1px solid ${Color.purple};
-        width: 1em;
-        height: 1em;
-        line-height: 1em;
+        border: 1px solid ${Color.blue};
+        width: ${TextSpacing.large};
+        height: ${TextSpacing.large};
+        line-height: 86%;
     }
     &:hover:before {
         cursor: pointer;
         color: ${Color.white};
-        background: ${Color.purple};
+        background: ${Color.blue};
     }
 `;
 

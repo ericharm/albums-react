@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DataGridProps } from '../../models/props.ts';
+import { DataGridProps } from './models';
 import { TextSpacing } from '../../Theme.ts';
 
 const Table = styled.table<{ $isClickable?: boolean }>`

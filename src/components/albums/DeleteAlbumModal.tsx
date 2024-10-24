@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { Modal } from '../ui/Modal';
 import { DispatchContext, StateContext } from '../../Store';
-import { setAlbums, setDeleteAlbumModalOpen, setUser } from '../../store/Action';
+import { setAlbums, setDeleteAlbumModalOpen, setUser } from '../../store/actions';
 import styled from 'styled-components';
 import { Spacing } from '../../Theme';
 import { Button, DeleteButton } from '../ui/Button';
@@ -39,9 +39,13 @@ export const DeleteAlbumModal: React.FC<React.PropsWithChildren> = () => {
             const albumsResponse = await searchAlbums(1, undefined);
             dispatch(setAlbums(albumsResponse.data));
         } catch (error: any) {
-            if (error && error.status === 403) toast.error("You're not logged in");
-            dispatch(setDeleteAlbumModalOpen(false));
-            dispatch(setUser(undefined));
+            if (error && error.status === 403) {
+                toast.error("You're not logged in");
+                dispatch(setDeleteAlbumModalOpen(false));
+                dispatch(setUser(undefined));
+                return;
+            }
+            toast.error('Unable to delete album');
         }
     }, [dispatch]);
 

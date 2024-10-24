@@ -6,7 +6,7 @@ import { Link } from '../ui/Link';
 import styled from 'styled-components';
 import { CurrentUser } from './CurrentUser';
 import { LoginLink } from './LoginLink';
-import { setLoginModalOpen, setUser } from '../../store/Action';
+import { setLoginModalOpen, setUser } from '../../store/actions';
 import { albumsPath } from '../../Router';
 
 const StyledBar = styled.div`
