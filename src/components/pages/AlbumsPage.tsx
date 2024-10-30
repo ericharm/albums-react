@@ -19,6 +19,7 @@ import {
 } from '../../store/actions';
 import { Pagination } from '../ui/Pagination';
 import { SearchAlbumsFormContainer } from '../albums/SearchAlbumsFormContainer';
+import { Pill } from '../ui/Pill';
 
 const GridWrapper = styled.div`
     display: grid;
@@ -42,7 +43,17 @@ const columns: Column[] = [
     { key: 'artist', label: 'Artist' },
     { key: 'title', label: 'Title' },
     { key: 'released', label: 'Released' },
-    { key: 'genres', label: 'Genres' },
+    {
+        key: 'genres',
+        label: 'Genres',
+        // formatter: genres => (
+        //     <>
+        //         {genres.map((genre: string) => (
+        //             <Pill key={genre} text={genre} />
+        //         ))}
+        //     </>
+        // ),
+    },
     { key: 'label', label: 'Label' },
     { key: 'notes', label: 'Notes' },
 ];

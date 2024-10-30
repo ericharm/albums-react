@@ -18,6 +18,7 @@ Albums React
 
 ## TODO
 
+- Handle auth error on create genre
 - Genre pills
 - Remove genre from album
 - Genre select

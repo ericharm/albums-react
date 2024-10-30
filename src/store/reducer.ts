@@ -6,6 +6,8 @@ export const reducer = (state: State, { type, payload }: Action) => {
             return { ...state, albums: payload };
         case ActionKind.SetGenres:
             return { ...state, genres: payload };
+        case ActionKind.AddGenre:
+            return { ...state, genres: state.genres ? [...state.genres, payload] : [payload] };
         case ActionKind.SetUser:
             return { ...state, user: payload };
         case ActionKind.SetLoginModalOpen:

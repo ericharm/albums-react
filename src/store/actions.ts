@@ -15,6 +15,11 @@ export const setGenres = (genres: Genre[]) => ({
     payload: genres,
 });
 
+export const addGenre = (genre: Genre) => ({
+    type: ActionKind.AddGenre,
+    payload: genre,
+});
+
 export const setUser = (user?: User) => {
     if (user) saveUser(user);
     else clearUser();

@@ -1,11 +1,20 @@
+import React from 'react';
+
 export interface Column {
     key: string;
     label: string;
+    formatter?: (value: any) => React.ReactNode;
 }
 
-export interface SelectFieldOption {
-    value?: string;
-    label: string;
+export interface DataGridProps<T> {
+    columns: Column[];
+    data: T[];
+    onClickRow?: (event: T) => void;
+}
+
+export interface ModalProps {
+    onClose?: () => void;
+    children: React.ReactNode;
 }
 
 export interface PaginationProps {
@@ -16,23 +25,14 @@ export interface PaginationProps {
     onSetPage: (page: number) => void;
 }
 
-export interface ModalProps {
-    onClose?: () => void;
-    children: React.ReactNode;
+export interface PillProps {
+    text: string;
+    onClickX?: () => void;
 }
 
-export interface DataGridProps<T> {
-    columns: Column[];
-    data: T[];
-    onClickRow?: (event: T) => void;
-}
-
-export interface TextFieldProps {
-    id: string;
+export interface SelectFieldOption {
     label: string;
-    name: string;
     value: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface SelectFieldProps {
@@ -42,4 +42,12 @@ export interface SelectFieldProps {
     value?: string;
     options: SelectFieldOption[];
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface TextFieldProps {
+    id: string;
+    label: string;
+    name: string;
+    value: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
