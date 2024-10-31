@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { DispatchContext, StateContext } from '../../Store';
 import { SelectFieldOption } from '../ui/models';
 import { addGenre, setGenres, setUser } from '../../store/actions';
-import { addAlbumGenreTag } from '../../service/AlbumGenresService';
+import { addAlbumGenreTag, removeAlbumGenreTag } from '../../service/AlbumGenresService';
 import { fetchAlbumGenres } from '../../service/AlbumGenresService';
 import { AlbumGenre } from '../../models/AlbumGenre';
 
@@ -75,28 +75,36 @@ export const GenresFormContainer: React.FC<GenresFormContainerProps> = ({ curren
         [setSelectedGenre]
     );
 
-    const removeGenreFromAlbum = useCallback((albumGenreId: string) => {
-        console.log('removeGenreFromAlbum', albumGenreId);
+    const removeGenreFromAlbum = useCallback(async (albumGenreId: string) => {
+      try {
+        await removeAlbumGenreTag(albumGenreId);
+        toast.success('Genre was removed from album');
+        setAlbumGenres(albumGenres!.filter(albumGenre => albumGenre.id !== albumGenreId));
+      } catch (error: any) {
+        if (error && error.status === 403) {
+          toast.error("You're not logged in");
+          dispatch(setUser(undefined));
+          return;
+        }
+        toast.error('Unable to remove genre from album');
+      }
     }, []);
 
-    const addGenreToAlbum = useCallback(() => {
-        const makeCall = async (albumId: string, genreId: string) => {
-            try {
-                const response = await addAlbumGenreTag(albumId, genreId);
-                toast.success(`Album was tagged as "${selectedGenre?.label}"`);
-                const albumGenre: AlbumGenre = { ...response.data };
-                // @ts-ignore
-                setAlbumGenres([...albumGenres, albumGenre]);
-            } catch (error: any) {
-                if (error && error.status === 403) {
-                    toast.error("You're not logged in");
-                    dispatch(setUser(undefined));
-                    return;
-                }
-                toast.error('Unable to tag album with genre');
+    const addGenreToAlbum = useCallback(async () => {
+        try {
+            const response = await addAlbumGenreTag(currentAlbum.id, selectedGenre!.value);
+            toast.success(`Album was tagged as "${selectedGenre?.label}"`);
+            const albumGenre: AlbumGenre = { ...response.data };
+            // @ts-ignore
+            setAlbumGenres([...albumGenres, albumGenre]);
+        } catch (error: any) {
+            if (error && error.status === 403) {
+                toast.error("You're not logged in");
+                dispatch(setUser(undefined));
+                return;
             }
-        };
-        makeCall(currentAlbum.id, selectedGenre!.value);
+            toast.error('Unable to tag album with genre');
+        }
     }, [selectedGenre, addAlbumGenreTag, toast, setAlbumGenres, dispatch, setUser]);
 
     return (

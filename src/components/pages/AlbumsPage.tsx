@@ -46,13 +46,8 @@ const columns: Column[] = [
     {
         key: 'genres',
         label: 'Genres',
-        // formatter: genres => (
-        //     <>
-        //         {genres.map((genre: string) => (
-        //             <Pill key={genre} text={genre} />
-        //         ))}
-        //     </>
-        // ),
+        formatter: (data) => (data.genres.join(', ') as unknown as JSX.Element
+        ),
     },
     { key: 'label', label: 'Label' },
     { key: 'notes', label: 'Notes' },

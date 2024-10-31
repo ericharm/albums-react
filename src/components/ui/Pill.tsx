@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { BorderRadius, Color, FontSize, FontWeight, TextSpacing } from '../../Theme';
 import { PillProps } from './models';
 
-const PillWrapper = styled.div`
+const PillWrapper = styled.div<{ $includeX?: boolean }>`
     display: inline-block;
     background: ${Color.blue};
     color: ${Color.white};
-    padding: ${TextSpacing.small};
-    padding-left: ${FontSize.small};
+    padding: ${TextSpacing.small} ${FontSize.small};
+    ${props => (props.$includeX ? `padding-right: ${TextSpacing.medium};` : '')}
     border-radius: ${BorderRadius.heavy};
 
     & + & {
@@ -23,6 +23,7 @@ const PillX = styled.div`
     width: ${FontSize.medium};
     height: ${FontSize.medium};
     justify-content: center;
+    margin-left: ${TextSpacing.small};
 
     &:hover {
         cursor: pointer;
@@ -33,7 +34,7 @@ const PillX = styled.div`
 `;
 
 export const Pill: React.FC<PillProps> = ({ text, onClickX }) => (
-    <PillWrapper>
+    <PillWrapper $includeX={!!onClickX}>
         {text}
         {onClickX && <PillX onClick={onClickX}>x</PillX>}
     </PillWrapper>
