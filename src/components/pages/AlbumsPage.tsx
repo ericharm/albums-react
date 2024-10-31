@@ -19,7 +19,6 @@ import {
 } from '../../store/actions';
 import { Pagination } from '../ui/Pagination';
 import { SearchAlbumsFormContainer } from '../albums/SearchAlbumsFormContainer';
-import { Pill } from '../ui/Pill';
 
 const GridWrapper = styled.div`
     display: grid;
