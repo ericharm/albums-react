@@ -18,8 +18,9 @@ Albums React
 
 ## TODO
 
-- Handle auth error on create genre
-- Genre pills
-- Remove genre from album
-- Genre select
-- Add genre to album
+- [ ] [Redux Toolkit](https://redux-toolkit.js.org/)
+- [ ] Refresh search when album genres change
+- [ ] Genre page
+- [ ] Some convenience functions for API requests
+- [ ] Some hook that handles all the auth stuff
+- [ ] Create genre confirmation modal
