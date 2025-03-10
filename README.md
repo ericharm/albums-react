@@ -24,3 +24,4 @@ Albums React
 - [ ] Some convenience functions for API requests
 - [ ] Some hook that handles all the auth stuff
 - [ ] Create genre confirmation modal
+- [ ] Fix usage consistency with theme sizing
