@@ -18,6 +18,8 @@ export const reducer = (state: State, { type, payload }: Action) => {
             return { ...state, isDeleteAlbumModalOpen: payload };
         case ActionKind.SetCurrentAlbum:
             return { ...state, currentAlbum: payload };
+        case ActionKind.SetQuery:
+            return { ...state, query: payload };
         default:
             console.warn('UNKNOWN ACTION', type);
             return state;

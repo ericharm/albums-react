@@ -8,4 +8,5 @@ export const initialState: State = {
     isAlbumFormModalOpen: false,
     isDeleteAlbumModalOpen: false,
     currentAlbum: undefined,
+    query: undefined,
 };

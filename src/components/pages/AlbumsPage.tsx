@@ -91,8 +91,8 @@ export const AlbumsPage: React.FC<React.PropsWithChildren> = () => {
     }, [closeModal]);
 
     const onSetPage = useCallback(
-        async (page: number) => {
-            const response = await searchAlbums(page);
+        async (page: number, query?: string) => {
+            const response = await searchAlbums(page, query);
             dispatch(setAlbums(response.data));
         },
         [dispatch, searchAlbums]

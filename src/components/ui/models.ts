@@ -22,7 +22,7 @@ export interface PaginationProps {
     pageSize: number;
     pages: number;
     total: number;
-    onSetPage: (page: number) => void;
+    onSetPage: (page: number, query?: string) => void;
 }
 
 export interface PillProps {

@@ -45,3 +45,8 @@ export const setCurrentAlbum = (currentAlbum?: Album) => ({
     type: ActionKind.SetCurrentAlbum,
     payload: currentAlbum,
 });
+
+export const setQuery = (query?: string) => ({
+    type: ActionKind.SetQuery,
+    payload: query ? query : undefined,
+})

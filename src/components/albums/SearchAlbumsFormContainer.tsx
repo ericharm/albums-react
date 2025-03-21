@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { DispatchContext } from '../../Store';
 import { SearchAlbumsRequest } from '../../service/models/albums';
-import { setAlbums } from '../../store/actions';
+import { setAlbums, setQuery } from '../../store/actions';
 import { searchAlbums } from '../../service/AlbumsService';
 import { SearchAlbumsForm } from './SearchAlbumsForm';
 
@@ -17,6 +17,7 @@ export const SearchAlbumsFormContainer: React.FC<React.PropsWithChildren> = () =
     const submitSearchAlbumsForm = useCallback(
         async (request: SearchAlbumsRequest) => {
             const albumsResponse = await searchAlbums(1, request.query);
+            dispatch(setQuery(request.query));
             dispatch(setAlbums(albumsResponse.data));
         },
         [dispatch]

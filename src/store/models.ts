@@ -17,6 +17,7 @@ export enum ActionKind {
     SetAlbumFormModalOpen,
     SetDeleteAlbumModalOpen,
     SetCurrentAlbum,
+    SetQuery,
 }
 
 export interface State {
@@ -27,4 +28,5 @@ export interface State {
     isAlbumFormModalOpen: boolean;
     isDeleteAlbumModalOpen: boolean;
     currentAlbum?: Album;
+    query?: string;
 }

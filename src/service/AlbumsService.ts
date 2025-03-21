@@ -8,13 +8,17 @@ const albumsUrl = 'albums';
 export const searchAlbums = (
     pageNumber: number,
     query?: string
-): Promise<AxiosResponse<AlbumsResponse>> =>
-    httpClient.get(albumsUrl, {
-        params: {
-            query: query,
-            page: pageNumber,
-        },
+): Promise<AxiosResponse<AlbumsResponse>> => {
+    const params: any = {
+        page: pageNumber,
+    };
+
+    if (query) params.query = query;
+
+    return httpClient.get(albumsUrl, {
+        params: params,
     });
+};
 
 export const createAlbum = (request: AlbumRequest): Promise<AxiosResponse<AlbumResponse>> => {
     const user = loadUser();
